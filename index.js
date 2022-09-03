@@ -1,54 +1,59 @@
-const loadCategories = async(category_id) =>{
+const loadCategories = () =>{
     const url = `https://openapi.programming-hero.com/api/news/categories`
-    const res = await fetch(url);
-    const data = await res.json();
-    displayCategories(data.data.news_category);
+    fetch(url)
+    .then (res=> res.json())
+    .then (data => displayCategories(data.data.news_category))
+    .catch((e) => {
+        console.log('Error:', e);
+    });
+    
 }
-const displayCategories= categories =>{
+    const displayCategories= categories =>{
     // console.log(categories);
     const categoriesContainer = document.getElementById('categoriesContainer');
     categories.forEach(category => {
         const categoryInput = document.createElement('label');
     categoryInput.innerHTML = `
-                 <label class="btn d-inline mx-4 ps-3 pe-3" onclick ="loadNews('${category.category_id}')">${category.category_name}</label>
-                 
-                            
+                 <label class="btn d-inline mx-4 ps-3 pe-3" onclick ="loadNews(${category.category_id})">${category.category_name}</label>
+                               
     `;
     categoriesContainer.appendChild(categoryInput);
         
     });
 
 }
-const loadNews =async(id) =>{
-    const url = `https://openapi.programming-hero.com/api/news=${id}`
-     fetch(url)
-    .then (res=> res.json())
-    .then (data => displayNews(data[0].data))
-        
-}
-const displayNews = News =>{
-    const newsContainer = document.getElementById('news-container');
-   
-        // console.log(News);
-     
-    newsContainer.innerHTML = `
-          <div class="col-md-4 mt-2">
-          <img src="${News.rating.thumbnail_url}" class="img-fluid rounded-start" alt="...">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">${News.rating.title}</h5>
-            <p class="card-text">${News.author.details}</p>
-            <p class="card-text">${News.author.details}<small class="text-muted">Last updated 3 mins ago</small></p>
-          </div>
-        </div>
-                 
-                            
-    `;
-   
-   
-        
+
+const loadNews = async(newsId) =>{
+    const url = `https://openapi.programming-hero.com/api/news=${newsId}`
+    const res = await fetch(url)
+    const data = await res.json()
+    displayNews(data);
 
 }
+
+const displayNews = newsData =>{
+    for(const allNews of newsData.data){
+        console.log(allNews.rating);
+    }
+    // const newsContainer = document.getElementById('news-container');
+    // console.log(totalNews);
+    // totalNews.forEach(News.data =>{
+    //     console.log(News.rating);
+        // const newsDiv =  document.createElement('div');
+        // newsDiv.innerHTML = `
+        // <div class="col-md-4 mt-2">
+         
+        //     <h5 class="title">Nothing</h5>
+           
+        //   </div>
+        // </div>
+                
+        // `;
+        // newsContainer.appendChild(newsDiv);
+    }
+           
+
+
+// loadNews();
  
 loadCategories();
