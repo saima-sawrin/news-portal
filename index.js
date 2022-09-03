@@ -67,7 +67,6 @@ const loadNews = id => {
             <p> ${allNews.rating.badge}  <br> ${allNews.rating.number} </small>  </p>
             </div>
             </div>
-            
             </div>
             </div> 
             </div> 
@@ -90,7 +89,4 @@ const toggleSpinner = isLoading => {
     }
 }
 
-
-
- 
 loadCategories();
