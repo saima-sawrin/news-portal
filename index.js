@@ -40,11 +40,12 @@ const loadNews = id => {
        newsContainer.textContent = '';
        
        // console.log(newsData);
+       const newsCounter = document.getElementById('newsCounter');
        
        for ( const allNews of newsData.data )
        {
-        const newsCounter = document.getElementById('newsCounter');
-        newsCounter.innerText = newsData.data.length + ` items found for Category ` ;
+        newsCounter.innerText = newsData.data.length + ` items found for Category `  ;
+        
         // console.log(News.rating);
         const newsDiv =  document.createElement('div');
         newsDiv.classList.add( 'authorImg');
@@ -86,8 +87,9 @@ const loadNews = id => {
             </div>
                 
         `;
+
         newsContainer.appendChild(newsDiv);
-        
+
     }
     
     toggleSpinner(false);
