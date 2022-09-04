@@ -41,9 +41,11 @@ const loadNews = id => {
        
        // console.log(newsData);
        const newsCounter = document.getElementById('newsCounter');
+       newsCounter.textContent = '';
        
        for ( const allNews of newsData.data )
        {
+        // new item found
         newsCounter.innerText = newsData.data.length + ` items found for Category `  ;
         
         // console.log(News.rating);
