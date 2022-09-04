@@ -9,7 +9,7 @@ const loadCategories = () =>{
     
 }
     const displayCategories= categories =>{
-        toggleSpinner(true);
+        
     const categoriesContainer = document.getElementById('categoriesContainer');
     categories.forEach(category => {
         const categoryInput = document.createElement('label');
@@ -25,6 +25,7 @@ const loadCategories = () =>{
 }
 
 const loadNews = id => { 
+    toggleSpinner(true);
     fetch ( `https://openapi.programming-hero.com/api/news/category/${id}` ) 
     . then ( res => res . json ()) 
     . then ( newsData => displayNews ( newsData ))
@@ -66,6 +67,12 @@ const loadNews = id => {
             <img src ="image/rating.png"> <small class="text-muted">
             <p> ${allNews.rating.badge}  <br> ${allNews.rating.number} </small>  </p>
             </div>
+            <div>
+
+            <small><button id ="${allNews._id}" onclick="showDetails('${allNews._id}')"  type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Show Details</button>
+            </small>
+            </div>
+
             </div>
             </div>
             </div> 
@@ -88,5 +95,19 @@ const toggleSpinner = isLoading => {
         loaderSection.classList.add('d-none');
     }
 }
-
+const showDetails = newsId => {
+    fetch(`https://openapi.programming-hero.com/api/news/${newsId}`)
+    .then(res => res.json())
+    .then(detailsData => modalDetails(detailsData)  )
+  }
+  const modalDetails = detailsData =>{
+    //console.log(detailsData.data[0].author.name)
+    const modalTitle = document.getElementById('exampleModalLabel')
+    modalTitle.innerText = detailsData.data[0].author.name? detailsData.data[0].author.name:'No Name Found'
+    const modalBody = document.getElementById('modalbody')
+    modalBody.innerHTML =`
+      <p> Total Views : ${detailsData.data[0].total_view? detailsData.data[0].total_view:'No Data Found'} </P>
+      <p> Rating : ${detailsData.data[0].rating.number? detailsData.data[0].rating.number:'No Data Found'} </P>
+    `
+  }  
 loadCategories();
