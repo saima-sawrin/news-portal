@@ -13,6 +13,7 @@ const loadCategories = () =>{
     const categoriesContainer = document.getElementById('categoriesContainer');
     categories.forEach(category => {
         const categoryInput = document.createElement('label');
+        categoryInput.classList.add('newsCat');
     categoryInput.innerHTML = `
                  <label id="${category.category_id}" class="btn d-inline mx-4 ps-3 pe-3" onclick ="loadNews(this.id)">${category.category_name}</label>
                                
@@ -38,8 +39,10 @@ const loadNews = id => {
        const newsContainer = document.getElementById('news-container');
        newsContainer.textContent = '';
        // console.log(newsData);
+       
        for ( const allNews of newsData.data )
        {
+        
         // console.log(News.rating);
         const newsDiv =  document.createElement('div');
         newsDiv.classList.add('news-item', 'authorImg');

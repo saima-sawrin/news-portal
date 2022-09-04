@@ -3,3 +3,22 @@
     width: 40px;
     border-radius: 20px;
 }
+@media screen  and (max-width: 576px){
+    body{
+        margin: 2%;
+        padding: 2%;
+    }
+    #newsCat{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #categoriesContainer{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .nav{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+}
