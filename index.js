@@ -35,17 +35,19 @@ const loadNews = id => {
     });
  }
         const displayNews = newsData =>{
-   
+            
        const newsContainer = document.getElementById('news-container');
        newsContainer.textContent = '';
+       
        // console.log(newsData);
        
        for ( const allNews of newsData.data )
        {
-        
+        const newsCounter = document.getElementById('newsCounter');
+        newsCounter.innerText = newsData.data.length + ` items found for Category ` ;
         // console.log(News.rating);
         const newsDiv =  document.createElement('div');
-        newsDiv.classList.add('news-item', 'authorImg');
+        newsDiv.classList.add( 'authorImg');
         newsDiv.innerHTML = `
         <div class="card mb-3 mt-5 mx-5" >
          <div class="row g-0"> 
@@ -85,7 +87,9 @@ const loadNews = id => {
                 
         `;
         newsContainer.appendChild(newsDiv);
+        
     }
+    
     toggleSpinner(false);
 }
 // Spinner
